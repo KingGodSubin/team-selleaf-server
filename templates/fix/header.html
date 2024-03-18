@@ -32,7 +32,7 @@
                 <div class="header-third-inner">
                     {% with request.path as current_path %}
                         {# 커뮤니티(일반 게시물, 노하우) 서비스 페이지면 메뉴 텍스트 색 변경 #}
-                        {% if 'post' in current_path or 'knowhow' in current_path %}
+                        {% if current_path != '/member/mypage/posts/' and 'post' in current_path or 'knowhow' in current_path %}
                             <button class="header-third-inner-firsta community" type="button">
                                 <span class="header-third-inner-firstsp">
                                     커뮤니티
@@ -46,17 +46,17 @@
                                     <div class="header-mymenumodal-content">
                                         <div class="header-mymenumodal-contentDiv">
                                             {% if 'post' in current_path %}
-                                            <a class="header-third-inner-firsta" href="{% url 'post:create' %}">
+                                            <a class="header-third-inner-firsta" href="/post/list/">
                                                 <span class="header-third-inner-secondsp">포스트</span>
                                             </a>
-                                            <a class="header-third-inner-seconda" href="{% url 'knowhow:create' %}">
+                                            <a class="header-third-inner-seconda" href="/knowhow/list/">
                                                 <span class="header-third-inner-secondsp">노하우</span>
                                             </a>
                                             {% elif 'knowhow' in current_path %}
-                                            <a class="header-third-inner-firsta" href="{% url 'post:create' %}">
+                                            <a class="header-third-inner-seconda" href="/post/list/">
                                                 <span class="header-third-inner-secondsp">포스트</span>
                                             </a>
-                                            <a class="header-third-inner-seconda" href="{% url 'knowhow:create' %}">
+                                            <a class="header-third-inner-firsta" href="/knowhow/list/">
                                                 <span class="header-third-inner-secondsp">노하우</span>
                                             </a>
                                             {% endif %}
@@ -77,10 +77,10 @@
                                 >
                                     <div class="header-mymenumodal-content">
                                         <div class="header-mymenumodal-contentDiv">
-                                            <a class="header-third-inner-seconda" href="{% url 'post:create' %}">
+                                            <a class="header-third-inner-seconda" href="{% url 'post:list' %}">
                                                 <span class="header-third-inner-secondsp">포스트</span>
                                             </a>
-                                            <a class="header-third-inner-seconda" href="{% url 'knowhow:create' %}">
+                                            <a class="header-third-inner-seconda" href="{% url 'knowhow:list' %}">
                                                 <span class="header-third-inner-secondsp">노하우</span>
                                             </a>
                                         </div>
@@ -89,7 +89,7 @@
                             </button>
                         {% endif %}
                         {# 강의 서비스 페이지면 메뉴 텍스트 색 변경 #}
-                        {% if 'lecture' in current_path and current_path != '/member/mypage/scraplectures/' %}
+                        {% if 'lecture' in current_path and current_path != '/member/mypage/scraplectures/' and current_path != '/member/mypage/lectures/' %}
                             <a class="header-third-inner-firsta" href="{% url 'lecture:main' %}">
                                 <span class="header-third-inner-secondsp">강의</span>
                             </a>
@@ -127,7 +127,7 @@
                                 {# 검색창 부분 #}
                                 <div class="header-fourth-inner-thirddiv">
                                     <span class="hearder-inner-thirddiv-span"> </span>
-                                    <form action="{% url  'search' %}" name="search-form"
+                                    <form action="{% url 'search' %}" name="search-form"
                                           style="flex:1; position: relative">
                                         <input
                                                 type="text"
@@ -209,8 +209,8 @@
                             <div class="header-info">
                                 {% if request.session.member %}
                                     <span class="header-kakao-wrap">
-                                      {% if alarm_count != 0 %}
-                                      <span class="header-alarm-pointer"></span>
+                                      {% if alarm_count %}
+                                        <span class="header-alarm-pointer"></span>
                                       {% endif %}
                                       <button
                                               type="button"
@@ -267,7 +267,7 @@
                                                 </a>
                                                 <a href="/alarm/main/" class="header-mymenumodal-contenta">
                                                     알림
-                                                    {% if alarm_count != 0 %}
+                                                    {% if alarm_count %}
                                                     <svg
                                                             class="header-mymenumodal-contentNew"
                                                             fill="#DB4455"
@@ -337,6 +337,23 @@
                                             </div>
                                             <div class="header-upload-subTitle">
                                                 최고의 식물을 찾고 계신가요?
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="header-content-photo" href="{% url 'post:create' %}">
+                                        <div class="header-photo-div">
+                                            <img
+                                                    src="{% static 'main/images/transationReview.png' %}"
+                                                    width="36"
+                                                    height="36"
+                                            />
+                                        </div>
+                                        <div class="header-upload-div">
+                                            <div class="header-upload-mainTitle">
+                                                일반 게시물 작성하기
+                                            </div>
+                                            <div class="header-upload-subTitle">
+                                                여러분의 식물 이야기를 다른 사람들과 공유해보세요!
                                             </div>
                                         </div>
                                     </a>

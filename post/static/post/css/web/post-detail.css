@@ -272,8 +272,8 @@
 }
 .uploader-img-box {
   display: inline-block;
-  background: url("/staticfiles/images/blank-image.png") 50% center / cover
-    no-repeat;
+  /*background: url("/staticfiles/images/blank-image.png") 50% center / cover*/
+  /*  no-repeat;*/
   border-radius: 50%;
   width: 40px;
   flex-shrink: 0;
@@ -881,13 +881,7 @@
 .sticky-icon-comment:before {
   content: "\e996";
 }
-.sticky-icon-share::before {
-  font-family: OhouseIcon;
-  vertical-align: top;
-}
-.sticky-icon-share:before {
-  content: "\ef04";
-}
+
 .sticky-data {
   position: absolute;
   left: 50%;
